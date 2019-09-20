@@ -1,4 +1,6 @@
-﻿using System;
+﻿using LibGit2Sharp;
+using System;
+using System.IO;
 
 namespace GitPanda
 {
@@ -6,12 +8,32 @@ namespace GitPanda
     {
         private static void Main(string[] args)
         {
-            foreach (var arg in args)
+            var routeToRepo = "./";
+
+            if (args.Length != 0)
             {
-                Console.WriteLine($"Arg: {arg}");
+                routeToRepo = args[0];
             }
 
-            Console.WriteLine("Hello World!");
+            var repoDirectory = Path.GetFullPath(routeToRepo);
+
+            try
+            {
+                using (var repo = new Repository(repoDirectory))
+                {
+                    var commits = repo.Commits;
+
+                    foreach (var commit in commits)
+                    {
+                        Console.WriteLine($"Commit: {commit.Message}");
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+
         }
     }
 }

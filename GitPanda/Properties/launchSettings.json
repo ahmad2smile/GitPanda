@@ -2,7 +2,7 @@
   "profiles": {
     "GitPanda": {
       "commandName": "Project",
-      "commandLineArgs": "firstarg secondarg"
+      "commandLineArgs": "../../../../"
     }
   }
 }
